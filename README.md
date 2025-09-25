@@ -1,14 +1,12 @@
 # Tic Tac Toe Game
 
-A simple, modern tic-tac-toe game built with HTML, CSS, and JavaScript.
-
 ## Features
 
-- **Two-player gameplay**: Players take turns placing X and O marks
-- **Win detection**: Automatically detects wins and ties
-- **Score tracking**: Keeps track of wins for both players
-- **Modern UI**: Clean, responsive design with smooth animations
-- **Game controls**: Reset current game or start a completely new game
+- **Two-player gameplay**
+- **Win detection**
+- **Score tracking**
+- **Modern UI**
+- **Game controls**
 
 ## How to Play
 
