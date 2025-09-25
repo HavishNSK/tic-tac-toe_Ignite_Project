@@ -1,38 +1,90 @@
+
+Havish NagaSai Sashank Kunchanapalli
+8:36 AM (0 minutes ago)
+to me
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="style.css">
+  <title>Tic Tac Toe</title>
+  <style>
+    body { font-family: Arial; text-align:center; }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      margin: 20px auto;
+      gap: 5px;
+    }
+    .cell {
+      border: 1px solid black;
+      font-size: 40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Tic Tac Toe</h1>
-        <div class="game-info">
-            <div class="current-player">Player <span id="current-player">X</span>'s turn</div>
-            <div class="score">
-                <span>X: <span id="score-x">0</span></span>
-                <span>O: <span id="score-o">0</span></span>
-            </div>
-        </div>
-        <div class="game-board" id="game-board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
-        <div class="controls">
-            <button id="reset-btn">Reset Game</button>
-            <button id="new-game-btn">New Game</button>
-        </div>
-        <div class="message" id="message"></div>
-    </div>
-    <script src="script.js"></script>
+  <h1>Tic Tac Toe</h1>
+  <p>Player turn: <span id="player">X</span></p>
+
+  <div class="board" id="board">
+    <div class="cell" data-id="0"></div>
+    <div class="cell" data-id="1"></div>
+    <div class="cell" data-id="2"></div>
+    <div class="cell" data-id="3"></div>
+    <div class="cell" data-id="4"></div>
+    <div class="cell" data-id="5"></div>
+    <div class="cell" data-id="6"></div>
+    <div class="cell" data-id="7"></div>
+    <div class="cell" data-id="8"></div>
+  </div>
+
+  <button onclick="resetBoard()">Reset</button>
+  <p id="message"></p>
+
+  <script>
+    let board = ["","","","","","","","",""];
+    let current = "X";
+
+    const cells = document.querySelectorAll(".cell");
+    const msg = document.getElementById("message");
+    const playerText = document.getElementById("player");
+
+    cells.forEach(cell=>{
+      cell.addEventListener("click", ()=>{
+        let id = cell.getAttribute("data-id");
+        if(board[id]===""){
+          board[id] = current;
+          cell.textContent = current;
+          if(checkWin()){
+            msg.innerText = current + " wins!";
+          } else {
+            current = current==="X" ? "O" : "X";
+            playerText.textContent = current;
+          }
+        }
+      })
+    });
+
+    function checkWin(){
+      let wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return wins.some(comb=> comb.every(i=> board[i]===current));
+    }
+
+    function resetBoard(){
+      board = ["","","","","","","","",""];
+      cells.forEach(c=>c.textContent="");
+      msg.innerText = "";
+      current = "X";
+      playerText.textContent = current;
+    }
+  </script>
 </body>
 </html>
